@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import Game from "./components/square"
+import Game from "./components/game"
+
 
 function App() {
   return (
