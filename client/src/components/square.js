@@ -27,6 +27,8 @@ class Board extends Component {
     }
 
     // I added this function. It gives X and O distinct colors
+    // Adding distinct colors improves the game's visuals
+    // The colors correspond to the colors of the logo I created
     letterColors(i) {
         if (this.state.squares[i] === "X") {
             return ("x-style")
@@ -43,7 +45,7 @@ class Board extends Component {
         const winner = winGame(this.state.squares);
         let status;
         if (winner) {
-            status = "Winner: " + winner;
+            status = winner + " wins!";
             timerNew();
         }
         else if (this.state.squares.includes(null)) {
@@ -56,6 +58,9 @@ class Board extends Component {
         // I added an extra clause to this if/else statement. Instead of Next Player being the default value,
         // I made it conditional to if this.state.squares includes null
         // If there is no winner, and there are no null spaces inside of this.state.squares, it's a draw
+        // I changed this because the original code did not have a condition for the game being a draw
+        // and from testing the game I got plenty of draws. I didn't want to have to manually refresh
+        // the page just for draws when I had created a refresh function for wins.
 
         return (
             <div>
@@ -97,9 +102,11 @@ function winGame(squares) {
     return null;
 }
 
-// I added this function. It pauses and then refreshes the page
+// I added this function. It waits and then refreshes the page
 // I've placed it inside of the game-winning check function
 // The page will refresh if someone wins or the game is a draw
+// I added this so that the users do not need to manually refresh the game
+// I decided to put it on a small delay so that the user has time to read the win or draw message
 function timerNew() {
     setTimeout(newGame, 1000)
 }
