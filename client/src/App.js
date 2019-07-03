@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import Game from "./components/game"
+import Game from "./components/square"
+import Logo from "./images/logo.png"
 
 
 function App() {
   return (
     <div className="App">
-      <h2>Hi Tic tac toe</h2>
+      <img src={Logo} alt="tic tac toe" className="logo-sizer" />
+      {/* <div className="divider"></div> */}
       <Game />
     </div>
   );

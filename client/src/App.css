@@ -1,8 +1,82 @@
 .App {
   text-align: center;
+  background-color: #fff;
+  margin: auto;
+  width: 65%;
+  height: 100%;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  font-family: 'Pangolin', cursive;
 }
 
-.colored-squares{
-  background-color: darkgray;
-  margin: 5px;
+body{
+  background-color: #54c3e6;
+}
+
+.logo-sizer{
+ width: 550px;
+}
+
+.divider{
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-color: #7f7f7f;
+  margin: auto;
+  width: 75%;
+}
+
+.game{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-top: 10px
+}
+
+.status{
+  padding-bottom: 30px;
+  font-size: 24px;
+}
+
+.game-board{
+  width: 400px;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 90px; 
+}
+
+.grid{
+  padding-top: 30px;
+  display: inline-grid;
+  grid-template-columns: repeat(3,8em);
+  grid-template-rows: repeat(3,8em);
+}
+
+/* This section with help from: https://alistapart.com/article/faux-grid-tracks/ */
+
+.grid > * {
+  border: 1px solid #7f7f7f;
+  background-color: #fff;
+	border-width: 0 2px 2px 0;
+	display: flex; 
+	align-items: center;
+	justify-content: center;
+}
+
+.grid > *:nth-of-type(3n)  {
+	border-right-width: 0;
+}
+.grid > *:nth-of-type(n+7) {
+	border-bottom-width: 0;
+}
+
+.x-style{
+  color: #ff3300;
+  font-size: 46px;
+  font-family: 'Pangolin', cursive;
+}
+
+.o-style{
+  color: #0066ff;
+  font-size: 46px;
+  font-family: 'Pangolin', cursive;
 }

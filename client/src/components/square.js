@@ -3,12 +3,11 @@ import React, { Component } from "react";
 
 function Square(props) {
     return (
-        <button className="square" onClick={props.onClick}>
+        <button className={props.data} onClick={props.onClick}>
             {props.value}
         </button>
     )
 }
-
 
 class Board extends Component {
     constructor(props) {
@@ -25,11 +24,20 @@ class Board extends Component {
             squares: squares,
             xStarts: !this.state.xStarts
         })
+    }
 
+    // I added this function. It gives X and O distinct colors
+    letterColors(i) {
+        if (this.state.squares[i] === "X") {
+            return ("x-style")
+        }
+        else {
+            return ("o-style")
+        }
     }
 
     renderSquare(i) {
-        return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />
+        return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} data={this.letterColors(i)} />
     }
     render() {
         const winner = winGame(this.state.squares);
@@ -37,25 +45,28 @@ class Board extends Component {
         if (winner) {
             status = "Winner: " + winner;
             timerNew();
-        } else {
+        }
+        else if (this.state.squares.includes(null)) {
             status = 'Next player: ' + (this.state.xStarts ? "X" : "O");
         }
-
+        else {
+            status = "It's a draw!";
+            timerNew();
+        }
+        // I added an extra clause to this if/else statement. Instead of Next Player being the default value,
+        // I made it conditional to if this.state.squares includes null
+        // If there is no winner, and there are no null spaces inside of this.state.squares, it's a draw
 
         return (
             <div>
                 <div className="status">{status}</div>
-                <div className="board-row">
+                <div className="grid">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
                     {this.renderSquare(3)}
                     {this.renderSquare(4)}
                     {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
                     {this.renderSquare(6)}
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}
@@ -86,7 +97,9 @@ function winGame(squares) {
     return null;
 }
 
-
+// I added this function. It pauses and then refreshes the page
+// I've placed it inside of the game-winning check function
+// The page will refresh if someone wins or the game is a draw
 function timerNew() {
     setTimeout(newGame, 1000)
 }
